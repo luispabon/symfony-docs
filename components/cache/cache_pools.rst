@@ -35,6 +35,20 @@ component provides several adapters ready to use in your applications.
 
     adapters/*
 
+Pool cache key namespaces
+-------------------------
+
+When using the cache component integrated into a wider Symfony application, deterministic namespaces for cache keys are assigned to each pool and environment automagically. A seed is also prepended to the namespace before hashing it up, and this seed is user configurable via `cache.prefix.seed`, like so:
+``cache:
+        # Put the unique name of your app here: the prefix seed
+        # is used to compute stable namespaces for cache keys.
+        prefix_seed: boom
+``
+
+This seed defaults to the value of `%kernel.root_dir%`.
+
+The full namespace is thus a hash of this seed, the service ID of the pool, the kernel name and the app environment.
+
 Looking for Cache Items
 -----------------------
 
